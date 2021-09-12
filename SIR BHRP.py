@@ -21,7 +21,7 @@ vax_r = 1 / 180  # vaccination rate
 days = 1000  # how many days to model
 CENZ = 6e5 * 14 * 4000 / 7.67e9  # Covid cases entering nz / day
 BVR = 0.9  # Boarder vaccination rate
-BTPr = 1 / 1e2  # Boarder worker exposure probability, with 3 occurrences in a year this
+BTPr = 1 / 1e2  # Boarder worker leak/exposure probability, with 3 occurrences in a year this
                 # is close to 1 / 2e1.  So 1 / 1e2 is conservative.
 N = 5e6  # total population
 T = np.linspace(0, days, days + 1)  # time array for plotting
