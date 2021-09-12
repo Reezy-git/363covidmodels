@@ -21,7 +21,8 @@ vax_r = 1 / 180  # vaccination rate
 days = 1000  # how many days to model
 CENZ = 6e5 * 14 * 4000 / 7.67e9  # Covid cases entering nz / day
 BVR = 0.9  # Boarder vaccination rate
-BTPr = 1 / 1e2  # Boarder worker exposure probability
+BTPr = 1 / 1e2  # Boarder worker exposure probability, with 3 occurrences in a year this
+                # is close to 1 / 2e1.  So 1 / 1e2 is conservative.
 N = 5e6  # total population
 T = np.linspace(0, days, days + 1)  # time array for plotting
 num_trials = 50  # number of repeats of the random trial
@@ -65,7 +66,8 @@ solution = np.vstack((pre_leak, post_leak))
 
 print("Final Numbers \nSusceptible: ", solution[-1:, 0], "\nInfected: ",
       solution[-1:, 1], "\nRemoved: ", solution[-1:, 2], "\nPeak infections: ",
-      max(solution[:, 1]) * N, "\nPeak immunity: ", max(solution[:, 2]) * N)
+      max(solution[:, 1]) * N, "\nPeak immunity: ", max(solution[:, 2]) * N,
+      "\nDays until breach average: ", days_pre)
 
 plt.figure('SIR BHRP/Vector Host Model', figsize=[8, 5])
 plt.plot(T, solution[:, 0], label="Susceptible(t)")
