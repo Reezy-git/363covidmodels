@@ -62,5 +62,6 @@ plt.plot(T, solution[:, 2], label="Removed(t)")
 plt.legend()
 plt.xlabel("Time")
 plt.ylabel("Proportion")
-plt.title('SIR Model')
+plt.title('Simple SIR with Vaccination, with boosters and Waning Immunity \n'
+          '180 days until outbreak, vaccination rate 1/90')
 plt.show()
