@@ -25,10 +25,12 @@ BTPr = 1 / 1e2  # Boarder worker leak/exposure probability, with 3 occurrences i
                 # is close to 1 / 2e1.  So 1 / 1e2 is conservative.
 N = 5e6  # total population
 T = np.linspace(0, days, days + 1)  # time array for plotting
-num_trials = 50  # number of repeats of the random trial
+num_trials = 500  # number of repeats of the random trial
 
 dp = []
 li = []
+
+leaks = 0
 
 
 def boarder_sim(days):
@@ -36,17 +38,19 @@ def boarder_sim(days):
     for i in range(days):
         x = random.uniform(0, 1)
         if random.uniform(0, 1) < BTPr * (1 - BVR) * beta * CENZ:
-            print("Boarder leak")
-            return i, math.ceil(x / BTPr * (1 - BVR) * beta * CENZ)
+
+            return i, math.ceil(x / BTPr * (1 - BVR) * beta * CENZ), 1
     else:
-        return days, 0
+        return days, 0, 0
 
 
 for i in range(num_trials):
-    x, y = boarder_sim(days)
+    x, y, l = boarder_sim(days)
+    leaks += l
     dp.insert(0, x)
     li.insert(0, y)
 
+print(leaks / num_trials)
 days_pre = math.floor(mean(dp))
 days_remaining = days - days_pre
 leaked_infections = mean(li)
@@ -76,5 +80,5 @@ plt.plot(T, solution[:, 2], label="Removed(t)")
 plt.legend()
 plt.xlabel("Time")
 plt.ylabel("Proportion")
-plt.title('SIR Model')
+plt.title('SIR BHRP/Vector Host Model')
 plt.show()
