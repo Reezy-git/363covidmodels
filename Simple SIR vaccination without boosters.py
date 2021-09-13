@@ -24,7 +24,7 @@ def no_vax_SIR_model(y, t, b, g, d):
 
 beta = 0.35  # rate of infection
 gamma = 0.1  # recovery rate
-delta = 1 / 360  # rate of loss of immunity
+delta = 1 / 180  # rate of loss of immunity
 vax_r = 1 / 90  # vaccination rate
 days = 600  # how many days to model
 N = 5e6
@@ -60,5 +60,6 @@ plt.plot(T, solution[:, 2], label="Removed(t)")
 plt.legend()
 plt.xlabel("Time")
 plt.ylabel("Proportion")
-plt.title('SIR Model')
+plt.title('Simple SIR with Vaccination, no boosters and Waning Immunity \n'
+          '180 days until outbreak, vaccination rate 1/90, ceasing at 180days')
 plt.show()
